@@ -1,7 +1,7 @@
-import React from "react";
-import YouTube from "react-youtube";
+import React from 'react';
+import YouTube from 'react-youtube';
 
-import * as S from "./styles";
+import * as S from './styles';
 
 const VideoItem = ({ video }) => {
   const opts = {
@@ -15,8 +15,10 @@ const VideoItem = ({ video }) => {
     <div>
       <S.VideoItem>
         <YouTube videoId={video.id.videoId} opts={opts} />
-        <div>{video.snippet.title}</div>
-        <div>{video.snippet.description}</div>
+          <S.VideoDetails>
+            <S.VideoTitle>{video.snippet.title}</S.VideoTitle>
+            <S.VideoDescription>{video.snippet.description}</S.VideoDescription>
+          </S.VideoDetails>
       </S.VideoItem>
     </div>
   );

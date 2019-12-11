@@ -9,3 +9,18 @@ export const VideoItem = styled.div`
     cursor: pointer;
   }
 `;
+
+export const VideoDetails = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-family: TitlingGothicFBWideLight;
+`;
+
+export const VideoTitle = styled.div`
+  font-weight: bold;
+`;
+
+export const VideoDescription = styled.div`
+
+`;
