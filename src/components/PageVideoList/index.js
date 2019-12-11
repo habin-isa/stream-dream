@@ -1,4 +1,6 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+
+import VideoItem from "../VideoItem";
 import { getVideos } from "../../services/videos";
 
 const PageVideoList = () => {
@@ -18,14 +20,22 @@ const PageVideoList = () => {
     } catch (error) {
       console.log("error fetching videos");
     } finally {
-      console.log("ran");
+      console.log("loadVideos has ran");
     }
   }, [videoData]);
+
+  useEffect(() => {
+    loadVideos();
+  }, [loadVideos]);
+
+  const renderedVideos = videoData.map(video => {
+    return <VideoItem key={video.id.videoId} video={video} />;
+  });
 
   return (
     <div>
       FERRARI
-      <button onClick={loadVideos}>LOAD</button>
+      {renderedVideos}
     </div>
   );
 };
