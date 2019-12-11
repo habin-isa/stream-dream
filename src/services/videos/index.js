@@ -12,7 +12,6 @@ export const getVideos = async ({ params }) => {
   const response = await axios.get(url, {
     params
   });
-
   console.log(response.data.items);
   return response;
 };

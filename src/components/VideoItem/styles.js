@@ -9,8 +9,3 @@ export const VideoItem = styled.div`
     cursor: pointer;
   }
 `;
-
-export const VideoImg = styled.img`
-  max-width: 200px;
-  max-height: 250px;
-`;
