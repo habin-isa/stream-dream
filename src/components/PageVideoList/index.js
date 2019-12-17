@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 
+import * as S from './styles';
 import LazyLoad from 'react-lazyload';
 import VideoItem from '../VideoItem';
-import Loading from '../Loading';
 import { getVideos } from '../../services/videos';
 
 const PageVideoList = () => {
@@ -35,17 +35,17 @@ const PageVideoList = () => {
   }, [loadVideos]);
 
   const renderedVideos = videoData.map(video => {
-    return (
-      <LazyLoad key={video.id.videoId} placeholder={<Loading/>} height={100} offset={[-100, 100]}>
-        <VideoItem key={video.id.videoId} video={video} />
-      </LazyLoad>
-		)
+      return (
+        <LazyLoad key={video.id.videoId} height={100} offset={[-100, 100]}>
+          <VideoItem key={video.id.videoId} video={video} />
+        </LazyLoad>
+      )
   });
 
   return (
-    <div>
+    <S.Wrapper>
       {renderedVideos}
-    </div>
+    </S.Wrapper>
   );
 };
 

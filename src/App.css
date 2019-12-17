@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background: #333;
+  width: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -17,7 +17,7 @@ const VideoItem = ({ video }) => {
         <YouTube videoId={video.id.videoId} opts={opts} />
           <S.VideoDetails>
             <S.VideoTitle>{video.snippet.title}</S.VideoTitle>
-            <S.VideoDescription>{video.snippet.description}</S.VideoDescription>
+            <S.VideoDate>{(video.snippet.publishedAt).slice(0, 10)}</S.VideoDate>
           </S.VideoDetails>
       </S.VideoItem>
     </div>
