@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 
 import * as S from './styles';
 import LazyLoad from 'react-lazyload';
+import Chart from '../Chart';
 import VideoItem from '../VideoItem';
 import { getVideos } from '../../services/videos';
 
@@ -17,7 +18,7 @@ const PageVideoList = () => {
           type: "video",
           part: "snippet",
 					channelId: paqChannelId,
-					order: 'date',
+          order: 'date',
           maxResults: 20
         }
       });
@@ -31,13 +32,16 @@ const PageVideoList = () => {
   }, [videoData]);
 
   useEffect(() => {
-    loadVideos();
-  }, [loadVideos]);
+    if (videoData.length === 0) {
+      loadVideos();
+    }
+  }, [loadVideos, videoData]);
 
   const renderedVideos = videoData.map(video => {
       return (
         <LazyLoad key={video.id.videoId} height={100} offset={[-100, 100]}>
           <VideoItem key={video.id.videoId} video={video} />
+          <Chart video={video} />
         </LazyLoad>
       )
   });

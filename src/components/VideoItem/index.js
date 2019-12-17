@@ -11,6 +11,23 @@ const VideoItem = ({ video }) => {
       autoplay: 0
     }
   };
+
+  // const filterVideoDates = (video) =
+
+  // const loadRecentVideos = (video) => {
+  //   var d = new Date();
+  //   var eighteenMonths = d.setMonth(d.getMonth() - 18);
+  //   if ((video.snippet.publishedAt).slice(0, 10) > eighteenMonths) {
+  //     console.log('ferrari', video);
+  //     setRecentVideos([...recentVideos, video]);
+  //     // setTheArray([...theArray, newElement]);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   loadRecentVideos();
+  // });
+
   return (
     <div>
       <S.VideoItem>
