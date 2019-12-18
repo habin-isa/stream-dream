@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageTitle should render 1`] = `
+<div
+  class="container"
+>
+  <h1>
+    <span
+      class="animation"
+    >
+      <span
+        class="first"
+      >
+        STREAM
+      </span>
+      <span
+        class="layer"
+      >
+        <span
+          class="second"
+        >
+          DREAM
+        </span>
+      </span>
+    </span>
+  </h1>
+</div>
+`;

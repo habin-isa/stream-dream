@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "9.3.2",
     "@testing-library/user-event": "7.1.2",
     "axios": "0.19.0",
@@ -12,8 +12,11 @@
     "chart.js": "2.9.3",
     "commitizen": "4.0.3",
     "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.7.0",
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
+    "jest-styled-components": "^6.3.4",
     "moment": "^2.24.0",
     "path": "^0.12.7",
     "prettier": "^1.19.1",
@@ -34,6 +37,22 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/**/index.stories.js",
+      "!src/setupTests.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 0,
+        "branches": 0,
+        "functions": 0,
+        "lines": 0
+      }
+    }
   },
   "browserslist": {
     "production": [
