@@ -5,6 +5,8 @@
 ## As a user I can:
 
 - Load Youtube videos from PAQ channel
+- See a chart for channel statistics (subscriber and view counts)
+- See total video count for channel (updated based on current date)
 - Newest videos show first, refreshing data
 - Fetch to Youtube data API
 - Title and date for each upload shown
