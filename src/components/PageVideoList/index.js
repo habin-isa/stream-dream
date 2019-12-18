@@ -27,7 +27,7 @@ const PageVideoList = () => {
         } finally {
             console.log('loadVideos has ran');
         }
-    }, [videoData]);
+    }, []);
 
     useEffect(() => {
         if (videoData.length === 0) {
