@@ -7,6 +7,7 @@ import { getVideos } from '../../services/videos';
 
 const PageVideoList = () => {
     const [videoData, setVideoData] = useState([]);
+    const [topVideo, setTopVideo] = useState([]);
 
     const paqChannelId = 'UCvO6uJUVJQ6SrATfsWR5_aA';
 

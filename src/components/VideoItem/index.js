@@ -1,4 +1,5 @@
 import React from 'react';
+
 import YouTube from 'react-youtube';
 
 import * as S from './styles';
@@ -6,7 +7,7 @@ import * as S from './styles';
 const VideoItem = ({ video }) => {
     const opts = {
         height: '390',
-        width: '640',
+        width: '600',
         playerVars: {
             autoplay: 0
         }

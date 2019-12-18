@@ -1,79 +1,68 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { Line } from 'react-chartjs-2';
-import moment from 'moment';
+import { HorizontalBar } from 'react-chartjs-2';
 import * as S from './styles';
-import { getVideos } from '../../services/videos';
+import { getChannelData } from '../../services/channel';
 
-const Chart = ({ video }) => {
-    const [totalVideoData, setTotalVideoData] = useState([]);
-    const [videoDates, setVideoDates] = useState([]);
+const Chart = () => {
+    const [chartData, setChartData] = useState([]);
+    const [videoCount, setVideoCount] = useState();
 
-    const paqChannelId = 'UCvO6uJUVJQ6SrATfsWR5_aA';
-
-    const loadVideos = useCallback(async () => {
+    const loadChannelData = useCallback(async () => {
         try {
-            const response = await getVideos({
+            const response = await getChannelData({
                 params: {
-                    type: 'video',
-                    part: 'snippet',
-                    channelId: paqChannelId,
-                    order: 'date',
-                    maxResults: 20
+                    part: 'snippet'
                 }
             });
-            setTotalVideoData(response.data.items);
+            let statistics = response.data.items[0].statistics;
+            setChartData((chartData) => [...chartData, statistics.subscriberCount]);
+            setChartData((chartData) => [...chartData, statistics.viewCount]);
+            setVideoCount(statistics.videoCount);
         } catch (error) {
-            console.log('error fetching videos');
-        } finally {
-            console.log('loadVideos has ran');
+            console.log('error fetching channel data');
         }
-    }, [totalVideoData]);
+    }, []);
 
-    useEffect(() => {
-        if (totalVideoData.length === 0) {
-            loadVideos();
-        } else {
-            totalVideoData.map((video) => {
-                let date = video.snippet.publishedAt.slice(0, 10);
-                return setVideoDates((videoDates) => [...videoDates, date]);
-            });
-            if (videoDates.length > 0) {
-                lineData();
+    const data = {
+        labels: ['Subscriber count', 'View count'],
+        datasets: [
+            {
+                label: 'PAQ channel statistics',
+                backgroundColor: '#fcba03',
+                borderColor: '#fcba03;',
+                borderWidth: 1,
+                hoverBackgroundColor: '#333',
+                hoverBorderColor: '#fcba03',
+                data: chartData
             }
-        }
-    }, [loadVideos, totalVideoData]);
-
-    // console.log('videoDates', videoDates);
-
-    const lineData = () => {
-        videoDates.reduce(function(acc, date) {
-            const yearWeek = moment(date).year() + '-' + moment(date).week();
-
-            if (typeof acc[yearWeek] === 'undefined') {
-                acc[yearWeek] = [];
-            }
-
-            acc[yearWeek].push(date);
-            // console.log('puppi', acc);
-            return acc;
-        });
-
-        // labels: [videoDates],
-        // datasets: [
-        //     {
-        //         label: 'PAQ video uploads',
-        //         fill: false,
-        //         backgroundColor: 'blue',
-        //         borderColor: 'blue',
-        //         pointBorderColor: 'blue',
-        //         pointRadius: 1,
-        //         data: videoDates
-        //     }
-        // ]
+        ]
     };
 
-    return <S.Wrapper>{/* <Line data={lineData} /> */}</S.Wrapper>;
+    const getDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const yyyy = today.getFullYear();
+
+        return mm + '-' + dd + '-' + yyyy;
+    };
+
+    useEffect(() => {
+        loadChannelData();
+    }, []);
+
+    return (
+        <S.Wrapper>
+            <S.ChartContainer>
+                <HorizontalBar data={data} />
+            </S.ChartContainer>
+            <S.Container>
+                PAQ Channel video count: {videoCount}
+                <S.Subtitle>As of {getDate()}</S.Subtitle>
+            </S.Container>
+        </S.Wrapper>
+    );
 };
 
 export default Chart;
