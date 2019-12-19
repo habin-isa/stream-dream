@@ -8,8 +8,9 @@
 - See a chart for channel statistics (subscriber and view counts)
 - See total video count for channel (updated based on current date)
 - Newest videos show first, refreshing data
+- Toggle to render vidoes by view count
 - Fetch to Youtube data API
-- Title and date for each upload shown
+- Title and date for each upload shown with statistics
 
 ## Use the app:
 
@@ -35,4 +36,3 @@ https://stream-dream-kyra.herokuapp.com/
 
 - Eslint, Prettier
 - LazyLoad
-- React-youtube

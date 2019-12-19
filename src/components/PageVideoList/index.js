@@ -7,11 +7,10 @@ import { getVideos } from '../../services/videos';
 
 const PageVideoList = () => {
     const [videoData, setVideoData] = useState([]);
-    const [topVideo, setTopVideo] = useState([]);
 
     const paqChannelId = 'UCvO6uJUVJQ6SrATfsWR5_aA';
 
-    const loadVideos = useCallback(async () => {
+    const loadVideosByDate = useCallback(async () => {
         try {
             const response = await getVideos({
                 params: {
@@ -26,15 +25,34 @@ const PageVideoList = () => {
         } catch (error) {
             console.log('error fetching videos');
         } finally {
-            console.log('loadVideos has ran');
+            console.log('loadVideosByDate has ran');
+        }
+    }, []);
+
+    const loadVideosByCount = useCallback(async () => {
+        try {
+            const response = await getVideos({
+                params: {
+                    type: 'video',
+                    part: 'snippet',
+                    channelId: paqChannelId,
+                    order: 'viewCount',
+                    maxResults: 20
+                }
+            });
+            setVideoData(response.data.items);
+        } catch (error) {
+            console.log('error fetching videos');
+        } finally {
+            console.log('loadVideosByCount has ran');
         }
     }, []);
 
     useEffect(() => {
         if (videoData.length === 0) {
-            loadVideos();
+            loadVideosByDate();
         }
-    }, [loadVideos, videoData]);
+    }, [loadVideosByDate, videoData]);
 
     const renderedVideos = videoData.map((video) => {
         return (
@@ -44,7 +62,15 @@ const PageVideoList = () => {
         );
     });
 
-    return <S.Wrapper>{renderedVideos}</S.Wrapper>;
+    return (
+        <S.Wrapper>
+            <S.Menu>
+                <S.DateBox onClick={loadVideosByDate}>Sort videos by date</S.DateBox>
+                <S.CountBox onClick={loadVideosByCount}>Sort videos by view count</S.CountBox>
+            </S.Menu>
+            {renderedVideos}
+        </S.Wrapper>
+    );
 };
 
 export default PageVideoList;
