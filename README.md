@@ -12,9 +12,6 @@
 - Fetch to Youtube data API
 - Title and date for each upload shown with statistics
 
-## Use the app:
-
-https://stream-dream-kyra.herokuapp.com/
 
 ![alt text](/assets/titlePage.png 'Preview')
 
